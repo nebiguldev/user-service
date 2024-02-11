@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @Builder
@@ -42,7 +43,7 @@ public class User implements UserDetails {
     private List<Token> tokens;
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role == null) {
+        if (Objects.isNull(this.role)) {
             return Collections.emptyList(); // Role null ise boş liste döndür
         }
         return this.role.getAuthorities();

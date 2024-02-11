@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 
 
 @Service
@@ -26,7 +27,7 @@ public class LogoutService implements LogoutHandler {
     ) {
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
-        if (authHeader == null ||!authHeader.startsWith("Bearer ")) {
+        if (Objects.isNull(authHeader) ||!authHeader.startsWith("Bearer ")) {
             return;
         }
         jwt = authHeader.substring(7);

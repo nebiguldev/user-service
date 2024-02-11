@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.io.IOException;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -71,7 +72,7 @@ public class AuthenticationService {
 
     private void saveUserToken(User user, String jwtToken) {
         Token existingToken = tokenRepository.findByTokenAndUser(jwtToken, user);
-        if (existingToken != null) {
+        if (Objects.nonNull(existingToken)) {
             existingToken.setExpired(false);
             existingToken.setRevoked(false);
             tokenRepository.save(existingToken);
